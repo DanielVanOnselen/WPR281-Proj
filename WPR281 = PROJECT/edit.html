@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Issue</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+   <nav class="navbar navbar-expand-lg shadow-sm">
+    <div class="container dashboard-shell">
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="dashboard.html">
+            Bug Tracking
+        </a>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+                <a class="nav-link" href="create.html">Create Issue</a>
+                <a class="nav-link" href="people.html">People</a>
+                <a class="nav-link" href="projects.html">Projects</a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+    <div class="container form-wrapper">
+        <div class="card form-card shadow-custom">
+            <h2 class="mb-4 form-title">Edit Issue</h2>
+
+            <form id="editForm">
+                <div class="mb-3">
+                    <label class="form-label">Summary</label>
+                    <input type="text" id="summary" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Detailed Description</label>
+                    <textarea id="description" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Who Identified the Issue</label>
+                    <input type="text" id="identifiedBy" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Date Identified</label>
+                    <input type="date" id="identifiedDate" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Assign To</label>
+                    <select class="form-select" id="assignedTo">
+                        <option selected disabled>-- Select Person --</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Project</label>
+                    <select class="form-select" id="project">
+                        <option selected disabled>-- Select Project --</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select id="status" class="form-select">
+                        <option value="open">Open</option>
+                        <option value="resolved">Resolved</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Priority</label>
+                    <select id="priority" class="form-select">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Target Resolution Date</label>
+                    <input type="date" id="targetDate" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Actual Resolution Date</label>
+                    <input type="date" id="actualResolutionDate" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Resolution Summary</label>
+                    <textarea id="resolutionSummary" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="edit.js"></script>
+</body>
+</html>

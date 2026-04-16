@@ -1,0 +1,100 @@
+body {
+    background: #2e415f;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #fdfdfd;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #000000 !important;
+    transition: all 0.2s ease;
+    margin-left: 0.75rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #655ee6 !important;
+}
+
+/* ISSUE CARD */
+.issue-card {
+    border-radius: 22px;
+    overflow: hidden;
+    background: #f8fafc;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+}
+
+.card-header {
+    background: #eef2f7;
+    border-bottom: 1px solid #d8e0ea;
+    padding: 1.2rem 1.5rem;
+}
+
+.card-header h3 {
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-body p {
+    margin-bottom: 0.85rem;
+    color: #475569;
+    line-height: 1.5;
+}
+
+.card-body strong {
+    color: #1f2937;
+}
+
+/* BUTTONS */
+.btn-primary,
+.btn-secondary {
+    border-radius: 12px;
+    padding: 0.72rem 1.2rem;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #655ee6;
+}
+
+.btn-primary:hover {
+    background-color: #554ed4;
+}
+
+.btn-secondary {
+    background-color: #64748b;
+}
+
+.btn-secondary:hover {
+    background-color: #475569;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+    .navbar-nav {
+        margin-top: 0.75rem;
+    }
+
+    .nav-link {
+        margin-left: 0;
+    }
+}
