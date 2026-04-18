@@ -46,31 +46,31 @@
 
                 <div class="mb-3">
                     <label class="form-label">Who Identified the Issue</label>
-                    <input type="text" class="form-control" id="identifiedBy">
+                    <input type="text" class="form-control" id="identifiedBy" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Date Identified</label>
-                    <input type="date" class="form-control" id="identifiedDate">
+                    <input type="date" class="form-control" id="identifiedDate" required>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Assign To</label>
-                    <select class="form-select" id="assignedTo">
-                        <option>-- Select Person --</option>
+                    <select class="form-select" id="assignedTo" required>
+                        <option value = "" disable selected>-- Select Person --</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Project</label>
-                    <select class="form-select" id="project">
-                        <option>-- Select Project --</option>
+                    <select class="form-select" id="project" required>
+                        <option value= "" disable selected>-- Select Project --</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Status</label>
-                    <select class="form-select" id="status">
+                    <select class="form-select" id="status" required>
                         <option value="open">Open</option>
                         <option value="resolved">Resolved</option>
                         <option value="overdue">Overdue</option>
@@ -79,7 +79,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Priority</label>
-                    <select class="form-select" id="priority">
+                    <select class="form-select" id="priority" required>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
@@ -88,7 +88,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Target Resolution Date</label>
-                    <input type="date" class="form-control" id="targetDate">
+                    <input type="date" class="form-control" id="targetDate" required>
                 </div>
 
                 <div class="mb-3">
