@@ -70,5 +70,6 @@ function goToCreateIssue() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    addTestIssues()
     renderIssues()
 })

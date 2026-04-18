@@ -8,20 +8,47 @@ body {
 /* NAVBAR */
 .navbar {
     background: #fdfdfd;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(6px);
 }
 
 .navbar-brand {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #0f172a !important;
+    letter-spacing: 0.3px;
 }
 
 .nav-link {
     font-weight: 500;
-    color: #000000 !important;
+    color: #475569 !important;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
     transition: all 0.2s ease;
-    margin-left: 0.75rem;
+}
+
+/* Hover effect */
+.nav-link:hover {
+    background: rgba(101, 94, 230, 0.08);
+    color: #655ee6 !important;
+}
+
+/* Active page */
+.nav-link.active {
+    background: rgba(101, 94, 230, 0.12);
+    color: #655ee6 !important;
+    font-weight: 600;
+}
+
+/* Logout slightly different */
+.logout-link {
+    color: #ef4444 !important;
+}
+
+.logout-link:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444 !important;
 }
 
 .nav-link:hover,

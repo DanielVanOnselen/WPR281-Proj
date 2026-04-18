@@ -5,34 +5,49 @@ body {
     min-height: 100vh;
 }
 
-/* centered width wrapper */
-.dashboard-shell {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* NAVBAR */
 .navbar {
     background: #fdfdfd;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(6px);
 }
 
 .navbar-brand {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #0f172a !important;
+    letter-spacing: 0.3px;
 }
 
 .nav-link {
     font-weight: 500;
-    color: #000000 !important;
+    color: #475569 !important;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
     transition: all 0.2s ease;
-    margin-left: 0.75rem;
 }
 
-.nav-link:hover,
-.nav-link.active {
+/* Hover effect */
+.nav-link:hover {
+    background: rgba(101, 94, 230, 0.08);
     color: #655ee6 !important;
+}
+
+/* Active page */
+.nav-link.active {
+    background: rgba(101, 94, 230, 0.12);
+    color: #655ee6 !important;
+    font-weight: 600;
+}
+
+/* Logout slightly different */
+.logout-link {
+    color: #ef4444 !important;
+}
+
+.logout-link:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444 !important;
 }
 
 /* MAIN PANEL */
@@ -40,6 +55,8 @@ body {
     background: #f8fafc;
     border-radius: 22px;
     box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+    border: 1px solid rgba(255,255,255,0.08);
+   
 }
 
 /* PAGE */
@@ -57,6 +74,7 @@ body {
 
 .status-column {
     background: #eef2f7;
+    border: 1px solid #d8e0ea;
     border-radius: 16px;
     padding: 1rem;
     height: 100%;
@@ -64,20 +82,24 @@ body {
 
 h6 {
     color: #334155;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
     text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
 }
 
 /* ADD BUTTON */
 .btn-add-task {
     background: #ffffff;
-    border: 1px solid #d8e0ea;
     color: #64748b;
     border-radius: 12px;
-    font-weight: 500;
     padding: 0.7rem 1rem;
     transition: all 0.2s ease;
+    border: 1px solid #cfd8e3;
+    color: #475569;
+    font-weight: 600;
 }
 
 .btn-add-task:hover {
@@ -93,6 +115,7 @@ h6 {
     transition: all 0.2s ease;
     background: #ffffff;
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    border-left: 4px solid #655ee6;
 }
 
 .kanban-card:hover {
@@ -105,11 +128,13 @@ h6 {
 }
 
 .task-title {
-    font-size: 0.96rem;
-    font-weight: 600;
+    
+    font-size: 1rem;
+    font-weight: 700;
     color: #1e293b;
     margin-bottom: 0;
     line-height: 1.4;
+    
 }
 
 /* AVATAR */
