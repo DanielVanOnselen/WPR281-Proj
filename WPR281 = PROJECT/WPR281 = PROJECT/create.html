@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Issue</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+<nav class="navbar shadow-sm">
+    <div class="container dashboard-shell">
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="dashboard.html">
+            🐞 Bug Tracker
+        </a>
+
+        <!-- Links -->
+        <div class="navbar-nav ms-auto d-flex flex-row gap-3 align-items-center">
+            <a class="nav-link" href="dashboard.html">Dashboard</a>
+            <a class="nav-link active" href="create.html">Create Issue</a>
+            <a class="nav-link" href="people.html">People</a>
+            <a class="nav-link" href="projects.html">Projects</a>
+            <a class="nav-link logout-link" href="#" onclick="logout()">Logout</a>
+        </div>
+
+    </div>
+</nav>
+
+    <div class="container form-wrapper">
+        <div class="card form-card shadow-custom">
+            <h2 class="mb-4 form-title">Create Issue</h2>
+
+            <form id="issueForm">
+                <div class="mb-3">
+                    <label class="form-label">Summary</label>
+                    <input type="text" class="form-control" id="summary" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Detailed Description</label>
+                    <textarea class="form-control" id="description" rows="3" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Who Identified the Issue</label>
+                    <input type="text" class="form-control" id="identifiedBy">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Date Identified</label>
+                    <input type="date" class="form-control" id="identifiedDate">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Assign To</label>
+                    <select class="form-select" id="assignedTo">
+                        <option>-- Select Person --</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Project</label>
+                    <select class="form-select" id="project">
+                        <option>-- Select Project --</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="status">
+                        <option value="open">Open</option>
+                        <option value="resolved">Resolved</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Target Resolution Date</label>
+                    <input type="date" class="form-control" id="targetDate">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Actual Resolution Date</label>
+                    <input type="date" class="form-control" id="actualResolutionDate">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Resolution Summary</label>
+                    <textarea class="form-control" id="resolutionSummary" rows="3"></textarea>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <a href="dashboard.html" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Create Issue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+   
+    <script src="authentication.js"></script>
+    <script>
+        checkAuth()
+    </script>
+    <script src="create.js"></script>
+</body>
+</html>

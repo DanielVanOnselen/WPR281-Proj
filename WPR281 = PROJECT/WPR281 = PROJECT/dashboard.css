@@ -1,0 +1,188 @@
+body {
+    background: #2e415f;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: #fdfdfd;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(6px);
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a !important;
+    letter-spacing: 0.3px;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #475569 !important;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.nav-link:hover {
+    background: rgba(101, 94, 230, 0.08);
+    color: #655ee6 !important;
+}
+
+/* Active page */
+.nav-link.active {
+    background: rgba(101, 94, 230, 0.12);
+    color: #655ee6 !important;
+    font-weight: 600;
+}
+
+/* Logout slightly different */
+.logout-link {
+    color: #ef4444 !important;
+}
+
+.logout-link:hover {
+    background: rgba(239, 68, 68, 0.08);
+    color: #ef4444 !important;
+}
+
+/* MAIN PANEL */
+.dashboard-panel {
+    background: #f8fafc;
+    border-radius: 22px;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18);
+    border: 1px solid rgba(255,255,255,0.08);
+   
+}
+
+/* PAGE */
+.page-title {
+    color: #0f172a;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    margin-bottom: 0.4rem;
+}
+
+.page-subtitle {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+.status-column {
+    background: #eef2f7;
+    border: 1px solid #d8e0ea;
+    border-radius: 16px;
+    padding: 1rem;
+    height: 100%;
+}
+
+h6 {
+    color: #334155;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+}
+
+/* ADD BUTTON */
+.btn-add-task {
+    background: #ffffff;
+    color: #64748b;
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    transition: all 0.2s ease;
+    border: 1px solid #cfd8e3;
+    color: #475569;
+    font-weight: 600;
+}
+
+.btn-add-task:hover {
+    background-color: #eef2ff;
+    border-color: #655ee6;
+    color: #655ee6;
+    transform: translateY(-1px);
+}
+
+/* CARDS */
+.kanban-card {
+    border-radius: 18px;
+    transition: all 0.2s ease;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    border-left: 4px solid #655ee6;
+}
+
+.kanban-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.14);
+}
+
+.card-body {
+    padding: 1rem 1rem 0.9rem;
+}
+
+.task-title {
+    
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0;
+    line-height: 1.4;
+    
+}
+
+/* AVATAR */
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #e2e8f0;
+}
+
+/* BADGES */
+.badge {
+    font-weight: 600;
+    font-size: 0.75rem;
+    padding: 0.45em 0.9em;
+    border-radius: 999px;
+}
+
+.badge-low {
+    background-color: #22c55e;
+    color: white;
+}
+
+.badge-medium {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.badge-high {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* COLUMNS */
+#open-column,
+#resolved-column,
+#overdue-column {
+    min-height: 220px;
+    padding: 0.25rem 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+    .navbar-nav {
+        margin-top: 0.75rem;
+    }
+
+    .nav-link {
+        margin-left: 0;
+    }
+}
