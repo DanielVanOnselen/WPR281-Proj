@@ -26,13 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
       description: document.querySelector("#description").value.trim(),
       identifiedBy: document.querySelector("#identifiedBy").value.trim(),
       identifiedDate: document.querySelector("#identifiedDate").value,
-      assignedTo: document.querySelector("assignedTo").value,
-      projectID: document.querySelector("#project").value,
+      assignedTo: document.querySelector("#assignedTo").value,
+      projectId: document.querySelector("#project").value,
       priority: document.querySelector("#priority").value,
-      targetDate: document.querySelector("#actualResolutionDate").value,
-      resolutionSummary: document
-        .querySelector("resolutionSummary")
-        .value.trim(),
+      targetDate: document.querySelector("#targetDate").value,
+      actualResolutionDate: document.querySelector("#actualResolutionDate").value,
+      resolutionSummary: document.querySelector("#resolutionSummary").value.trim(),
     };
 
     if (!formData.summary || !formData.description) {
@@ -59,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
       projectId: formData.projectId,
       priority: formData.priority,
       dateCreated: formData.identifiedDate
-        ? new date(formData.identifiedDate).toISOString()
-        : new date().toISOString(),
-      targetDate: formData.targetDate(),
+        ? new Date(formData.identifiedDate).toISOString()
+        : new Date().toISOString(),
+      targetDate: formData.targetDate,
       dateResolved: formData.actualResolutionDate
-        ? new date(formData.actualResolutionDate).toISOString()
+        ? new Date(formData.actualResolutionDate).toISOString()
         : "",
       resolutionSummary: formData.resolutionSummary,
     };
