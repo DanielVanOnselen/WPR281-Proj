@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const issue = {
-            id: generateId("ISS"),
+            id: getNextId("ISS", getIssues()),
             summary: formData.summary,
             description: formData.description,
             identifiedById: formData.identifiedById,
@@ -107,6 +107,7 @@ function populateProjectDropdown() {
         select.appendChild(option)
     })
 }
+
 function populateIdentifiedByDropdown() {
     const select = document.getElementById("identifiedBy")
     if (!select) return

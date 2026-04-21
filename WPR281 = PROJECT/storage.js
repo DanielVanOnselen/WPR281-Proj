@@ -134,7 +134,7 @@ function AddNewIssue(issue) {
     const issues = getIssues()
 
     const newIssue = {
-        id: generateId("ISS"),
+        id: getNextId("ISS", issues),
         ...issue
     }
 
