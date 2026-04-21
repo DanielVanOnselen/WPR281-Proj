@@ -1,8 +1,15 @@
 checkAuth()
 
+let dateEditModalInstance = null
+
 document.addEventListener("DOMContentLoaded", () => {
     if (typeof initData === "function") {
         initData()
+    }
+
+    const modalElement = document.getElementById("dateEditModal")
+    if (modalElement) {
+        dateEditModalInstance = new bootstrap.Modal(modalElement)
     }
 
     updateStatusesFromDates()
@@ -12,9 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateStatusesFromDates() {
     const issues = getIssues()
     let changed = false
-
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
 
     issues.forEach(issue => {
         const newStatus = calculateIssueStatus(issue.targetDate, issue.actualResolutionDate)
@@ -31,11 +35,11 @@ function updateStatusesFromDates() {
 }
 
 function calculateIssueStatus(targetDate, actualResolutionDate) {
-    if (actualResolutionDate) {
+    if (actualResolutionDate && actualResolutionDate.trim() !== "") {
         return "resolved"
     }
 
-    if (!targetDate) {
+    if (!targetDate || targetDate.trim() === "") {
         return "open"
     }
 
@@ -73,7 +77,22 @@ function createCard(issue) {
              onclick="openIssue('${issue.id}')"
              style="cursor:pointer;">
             <div class="card-body">
-                <p class="task-title">${issue.summary || "Untitled issue"}</p>
+                <div class="d-flex justify-content-between align-items-start">
+                    <p class="task-title mb-0">${issue.summary || "Untitled issue"}</p>
+
+                    <div class="dropdown" onclick="event.stopPropagation()">
+                        <button class="btn btn-sm btn-menu" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            &#8942;
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <button class="dropdown-item" onclick="openDateEditor('${issue.id}')">
+                                    Set / Change Dates
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="d-flex align-items-center justify-content-between mt-3">
                     <div class="d-flex align-items-center">
@@ -121,4 +140,50 @@ function openIssue(id) {
 
 function goToCreateIssue() {
     window.location.href = "create.html"
+}
+
+function openDateEditor(issueId) {
+    const issue = getIssueById(issueId)
+
+    if (!issue) {
+        alert("Issue not found")
+        return
+    }
+
+    document.getElementById("modalIssueId").value = issue.id
+    document.getElementById("modalTargetDate").value = issue.targetDate || ""
+    document.getElementById("modalActualResolutionDate").value = issue.actualResolutionDate || ""
+
+    if (dateEditModalInstance) {
+        dateEditModalInstance.show()
+    }
+}
+
+function saveIssueDates() {
+    const issueId = document.getElementById("modalIssueId").value
+    const targetDate = document.getElementById("modalTargetDate").value
+    const actualResolutionDate = document.getElementById("modalActualResolutionDate").value
+
+    const issue = getIssueById(issueId)
+
+    if (!issue) {
+        alert("Issue not found")
+        return
+    }
+
+    const newStatus = calculateIssueStatus(targetDate, actualResolutionDate)
+
+    const updatedData = {
+        targetDate: targetDate,
+        actualResolutionDate: actualResolutionDate,
+        status: newStatus
+    }
+
+    updateIssue(issueId, updatedData)
+
+    if (dateEditModalInstance) {
+        dateEditModalInstance.hide()
+    }
+
+    renderIssues()
 }

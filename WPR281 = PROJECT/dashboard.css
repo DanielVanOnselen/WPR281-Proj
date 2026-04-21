@@ -175,6 +175,23 @@ h6 {
     min-height: 220px;
     padding: 0.25rem 0;
 }
+.btn-menu {
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 0.35rem;
+}
+
+.btn-menu:hover {
+    color: #655ee6;
+    background: transparent;
+}
+
+.btn-menu:focus {
+    box-shadow: none;
+}
 
 /* RESPONSIVE */
 @media (max-width: 991px) {
