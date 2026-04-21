@@ -1,13 +1,55 @@
-// Member 1 scope note:
-// Dashboard display and navigation are complete
-// MEMBER 1: render issue summaries, apply display styling, and handle page navigation
-// MEMBER 4: may later replace temporary storage reads with shared helper functions
-// MEMBER 2 and MEMBER 4 must agree on the final issue structure
+checkAuth()
 
-function getIssues() {
-    // Temporary display-only read
-    // MEMBER 4: replace with shared getIssues/getData helper later
-    return JSON.parse(localStorage.getItem("issues")) || []
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof initData === "function") {
+        initData()
+    }
+
+    updateStatusesFromDates()
+    renderIssues()
+})
+
+function updateStatusesFromDates() {
+    const issues = getIssues()
+    let changed = false
+
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    issues.forEach(issue => {
+        const newStatus = calculateIssueStatus(issue.targetDate, issue.actualResolutionDate)
+
+        if (issue.status !== newStatus) {
+            issue.status = newStatus
+            changed = true
+        }
+    })
+
+    if (changed) {
+        saveIssues(issues)
+    }
+}
+
+function calculateIssueStatus(targetDate, actualResolutionDate) {
+    if (actualResolutionDate) {
+        return "resolved"
+    }
+
+    if (!targetDate) {
+        return "open"
+    }
+
+    const today = new Date()
+    const target = new Date(targetDate)
+
+    today.setHours(0, 0, 0, 0)
+    target.setHours(0, 0, 0, 0)
+
+    if (target < today) {
+        return "overdue"
+    }
+
+    return "open"
 }
 
 function getPriorityClass(priority) {
@@ -17,20 +59,36 @@ function getPriorityClass(priority) {
 }
 
 function createCard(issue) {
+    let assignedName = "Unassigned"
+
+    if (issue.assignedPersonId) {
+        const person = getPersonById(issue.assignedPersonId)
+        if (person) {
+            assignedName = `${person.name} ${person.surname || ""}`.trim()
+        }
+    }
+
     return `
         <div class="card kanban-card shadow-sm border-0 mb-3"
-             onclick="openIssue(${issue.id})"
+             onclick="openIssue('${issue.id}')"
              style="cursor:pointer;">
             <div class="card-body">
                 <p class="task-title">${issue.summary || "Untitled issue"}</p>
 
-                <div class="d-flex align-items-center mt-3">
-                    <img src="https://ui-avatars.com/api/?name=${issue.assignedTo || "User"}&background=random"
-                         class="avatar me-2"
-                         alt="Assigned person">
-                    <span class="badge rounded-pill ${getPriorityClass(issue.priority)}">
-                        ${issue.priority || "low"}
-                    </span>
+                <div class="d-flex align-items-center justify-content-between mt-3">
+                    <div class="d-flex align-items-center">
+                        <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(assignedName)}&background=random"
+                             class="avatar me-2"
+                             alt="Assigned person">
+
+                        <span class="badge rounded-pill ${getPriorityClass(issue.priority)}">
+                            ${issue.priority || "low"}
+                        </span>
+                    </div>
+
+                    <small class="text-muted text-capitalize">
+                        ${issue.status || "open"}
+                    </small>
                 </div>
             </div>
         </div>
@@ -47,16 +105,12 @@ function renderIssues() {
     issues.forEach(issue => {
         const card = createCard(issue)
 
-        switch (issue.status) {
-            case "open":
-                document.getElementById("open-column").innerHTML += card
-                break
-            case "resolved":
-                document.getElementById("resolved-column").innerHTML += card
-                break
-            case "overdue":
-                document.getElementById("overdue-column").innerHTML += card
-                break
+        if (issue.status === "open") {
+            document.getElementById("open-column").innerHTML += card
+        } else if (issue.status === "resolved") {
+            document.getElementById("resolved-column").innerHTML += card
+        } else if (issue.status === "overdue") {
+            document.getElementById("overdue-column").innerHTML += card
         }
     })
 }
@@ -68,7 +122,3 @@ function openIssue(id) {
 function goToCreateIssue() {
     window.location.href = "create.html"
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    renderIssues()
-})

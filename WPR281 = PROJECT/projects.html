@@ -9,30 +9,35 @@
     <link rel="stylesheet" href="list.css">
 </head>
 <body>
-<nav class="navbar shadow-sm">
-    <div class="container dashboard-shell">
+    <nav class="navbar shadow-sm">
+        <div class="container dashboard-shell">
+            <a class="navbar-brand fw-bold" href="dashboard.html">🐞 Bug Tracker</a>
 
-        <!-- Brand -->
-        <a class="navbar-brand fw-bold" href="dashboard.html">
-            🐞 Bug Tracker
-        </a>
-
-        <!-- Links -->
-        <div class="navbar-nav ms-auto d-flex flex-row gap-3 align-items-center">
-            <a class="nav-link" href="dashboard.html">Dashboard</a>
-            <a class="nav-link" href="create.html">Create Issue</a>
-            <a class="nav-link" href="people.html">People</a>
-            <a class="nav-link active" href="projects.html">Projects</a>
-            <a class="nav-link logout-link" href="#" onclick="logout()">Logout</a>
+            <div class="navbar-nav ms-auto d-flex flex-row gap-3 align-items-center">
+                <a class="nav-link" href="dashboard.html">Dashboard</a>
+                <a class="nav-link" href="create.html">Create Issue</a>
+                <a class="nav-link" href="people.html">People</a>
+                <a class="nav-link active" href="projects.html">Projects</a>
+                <a class="nav-link logout-link" href="javascript:void(0)" onclick="logout()">Logout</a>
+            </div>
         </div>
-
-    </div>
-</nav>
+    </nav>
 
     <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Projects</h2>
-            <button class="btn btn-primary" type="button">Add Project</button>
+        <h2 class="mb-4">Projects</h2>
+
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+                <h5 class="mb-3">Add Project</h5>
+                <form id="projectForm" class="row g-3">
+                    <div class="col-md-10">
+                        <input type="text" id="projectName" class="form-control" placeholder="Project Name" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Add Project</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="card shadow-sm border-0">
@@ -42,21 +47,23 @@
                         <tr>
                             <th>ID</th>
                             <th>Project Name</th>
+                            <th>Total Issues</th>
+                            <th>Status Breakdown</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="projectsTableBody">
                         <tr>
-                            <td colspan="2" class="text-muted">Projects will be loaded here.</td>
+                            <td colspan="5" class="text-muted">Projects will be loaded here</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <script src="storage.js"></script>
     <script src="authentication.js"></script>
-    <script>
-        checkAuth()
-    </script>
     <script src="projects.js"></script>
 </body>
 </html>

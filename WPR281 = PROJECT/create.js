@@ -1,93 +1,146 @@
-// Member 1 scope note:
-// This page UI is complete
-// MEMBER 2: implement issue creation logic and validation
-// MEMBER 4: provide shared storage/data helpers and populate dropdowns
+checkAuth()
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("issueForm");
-
-  // MEMBER 4:
-  // Populate assignedTo dropdown from stored people data
-
-  // MEMBER 4:
-  // Populate project dropdown from stored project data
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    // MEMBER 2:
-    // Read all form values and build the issue object
-
-    // MEMBER 2:
-    // Validate required fields and apply issue creation rules
-
-    const formData = {
-      summary: document.querySelector("#summary").value.trim(),
-      description: document.querySelector("#description").value.trim(),
-      identifiedBy: document.querySelector("#identifiedBy").value.trim(),
-      identifiedDate: document.querySelector("#identifiedDate").value,
-      assignedTo: document.querySelector("#assignedTo").value,
-      projectId: document.querySelector("#project").value,
-      priority: document.querySelector("#priority").value,
-      targetDate: document.querySelector("#targetDate").value,
-      actualResolutionDate: document.querySelector("#actualResolutionDate").value,
-      resolutionSummary: document.querySelector("#resolutionSummary").value.trim(),
-    };
-
-    if (!formData.summary || !formData.description) {
-      alert("Summary and description are required!");
-      return;
+    if (typeof initData === "function") {
+        initData()
     }
 
-    const validPriorities = ["low", "medium", "high"];
+    populatePeopleDropdown()
+    populateProjectDropdown()
+    populateIdentifiedByDropdown()
 
-    if (!validPriorities.includes(formData.priority)) {
-      alert("Invalid priority");
-      return;
+    const form = document.getElementById("issueForm")
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault()
+
+        const formData = {
+            summary: document.querySelector("#summary").value.trim(),
+            description: document.querySelector("#description").value.trim(),
+            identifiedById: document.querySelector("#identifiedBy").value,
+            identifiedDate: document.querySelector("#identifiedDate").value,
+            assignedPersonId: document.querySelector("#assignedTo").value,
+            projectId: document.querySelector("#project").value,
+            priority: document.querySelector("#priority").value,
+            targetDate: document.querySelector("#targetDate").value,
+            actualResolutionDate: document.querySelector("#actualResolutionDate").value,
+            resolutionSummary: document.querySelector("#resolutionSummary").value.trim()
+        }
+
+        if (
+            !formData.summary ||
+            !formData.description ||
+            !formData.identifiedById ||
+            !formData.identifiedDate ||
+            !formData.projectId ||
+            !formData.priority ||
+            !formData.targetDate
+        ) {
+            alert("Please fill in all required fields")
+            return
+        }
+
+        const validPriorities = ["low", "medium", "high"]
+
+        if (!validPriorities.includes(formData.priority)) {
+            alert("Invalid priority selected")
+            return
+        }
+
+        const issue = {
+            id: generateId("ISS"),
+            summary: formData.summary,
+            description: formData.description,
+            identifiedById: formData.identifiedById,
+            identifiedDate: formData.identifiedDate,
+            assignedPersonId: formData.assignedPersonId || null,
+            projectId: formData.projectId,
+            status: "open",
+            priority: formData.priority,
+            targetDate: formData.targetDate,
+            actualResolutionDate: formData.actualResolutionDate || "",
+            resolutionSummary: formData.resolutionSummary || ""
+        }
+
+        issue.status = calculateIssueStatus(issue.targetDate, issue.actualResolutionDate)
+
+        const issues = getIssues() || []
+        issues.push(issue)
+        saveIssues(issues)
+
+        window.location.href = "dashboard.html"
+    })
+})
+
+function populatePeopleDropdown() {
+    const select = document.getElementById("assignedTo")
+    if (!select) return
+
+    const people = getPeople() || []
+
+    select.innerHTML = `<option value="" selected>-- Select Person --</option>`
+
+    people.forEach(person => {
+        if (!person.id || !person.name) return
+
+        const option = document.createElement("option")
+        option.value = person.id
+        option.textContent = `${person.name} ${person.surname || ""}`.trim()
+        select.appendChild(option)
+    })
+}
+
+function populateProjectDropdown() {
+    const select = document.getElementById("project")
+    if (!select) return
+
+    const projects = getProjects() || []
+
+    select.innerHTML = `<option value="" disabled selected>-- Select Project --</option>`
+
+    projects.forEach(project => {
+        if (!project.id || !project.name) return
+
+        const option = document.createElement("option")
+        option.value = project.id
+        option.textContent = project.name
+        select.appendChild(option)
+    })
+}
+function populateIdentifiedByDropdown() {
+    const select = document.getElementById("identifiedBy")
+    if (!select) return
+
+    const people = getPeople() || []
+
+    select.innerHTML = `<option value="" disabled selected>-- Select Person --</option>`
+
+    people.forEach(person => {
+        const option = document.createElement("option")
+        option.value = person.id
+        option.textContent = `${person.name} ${person.surname || ""}`.trim()
+        select.appendChild(option)
+    })
+}
+
+function calculateIssueStatus(targetDate, actualResolutionDate) {
+    if (actualResolutionDate) {
+        return "resolved"
     }
 
-    const issue = {
-      id: Date.now(),
-      summary: formData.summary,
-      description: formData.description,
-      createdBy: formData.identifiedBy || "unknown",
-      assignedTo:
-        formData.assignedTo && formData.assignedTo !== "-- Select Person --"
-          ? formData.assignedTo
-          : "unassigned",
-      projectId: formData.projectId,
-      priority: formData.priority,
-      dateCreated: formData.identifiedDate
-        ? new Date(formData.identifiedDate).toISOString()
-        : new Date().toISOString(),
-      targetDate: formData.targetDate,
-      dateResolved: formData.actualResolutionDate
-        ? new Date(formData.actualResolutionDate).toISOString()
-        : "",
-      resolutionSummary: formData.resolutionSummary,
-    };
-
-    const today = new Date();
-    const target = formData.targetDate ? new Date(formData.targetDate) : null;
-
-    if (issue.dateResolved) {
-      issue.status = "resolved";
-    } else if (target && target < today) {
-      issue.status = "overdue";
-    } else {
-      issue.status = "open";
+    if (!targetDate) {
+        return "open"
     }
 
-    // MEMBER 4:
-    // Save the issue using shared storage/data helper functions
-    const issues = getData("issues") || [];
-    issues.push(issue);
-    saveData("issues", issues);
+    const today = new Date()
+    const target = new Date(targetDate)
 
-    // MEMBER 2:
-    // Redirect after successful creation
-    // Example:
-    // window.location.href = "dashboard.html"
-    window.location.href = "dashboard.html";
-  });
-});
+    today.setHours(0, 0, 0, 0)
+    target.setHours(0, 0, 0, 0)
+
+    if (target < today) {
+        return "overdue"
+    }
+
+    return "open"
+}

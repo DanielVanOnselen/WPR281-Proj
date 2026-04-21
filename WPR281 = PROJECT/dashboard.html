@@ -9,23 +9,17 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-  <nav class="navbar shadow-sm">
+<nav class="navbar shadow-sm">
     <div class="container dashboard-shell">
+        <a class="navbar-brand fw-bold" href="dashboard.html">🐞 Bug Tracker</a>
 
-        <!-- Brand -->
-        <a class="navbar-brand fw-bold" href="dashboard.html">
-            🐞 Bug Tracker
-        </a>
-
-        <!-- Links -->
         <div class="navbar-nav ms-auto d-flex flex-row gap-3 align-items-center">
             <a class="nav-link active" href="dashboard.html">Dashboard</a>
             <a class="nav-link" href="create.html">Create Issue</a>
             <a class="nav-link" href="people.html">People</a>
             <a class="nav-link" href="projects.html">Projects</a>
-            <a class="nav-link logout-link" href="#" onclick="logout()">Logout</a>
+            <a class="nav-link logout-link" href="javascript:void(0)" onclick="logout()">Logout</a>
         </div>
-
     </div>
 </nav>
 
@@ -64,12 +58,9 @@
         </div>
     </div>
 
-    <script src="authentication.js"></script>
-    <script>
-        checkAuth()
-    </script>
-    
-    <script src="dashboard.js"></script>
+<script src="storage.js"></script>
+<script src="authentication.js"></script>
+<script src="dashboard.js"></script>
 
 </body>
 </html>
